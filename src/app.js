@@ -99,7 +99,7 @@
     });
 
     var server = app.listen(settings.server.port, function () {
-        logs.logger.log('info', 'Local server listening on port ' + server.address().port );
+        logs.logger.log('info', '本地服务器启动，正在监听端口<' + server.address().port + '>...' );
     });
     module.exports = app;
 

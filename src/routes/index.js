@@ -1,17 +1,20 @@
 /**
  * Created by unique on 2018/5/26.
  */
+var express = require('express');
+var settings = require('../setting');
+var logs = require('../config/logger.js');
+var checkNotLogin = require('../middlewares/check').checkNotLogin;
+const mysql = require("mysql");
 
 module.exports = function (app) {
 
-    app.get('/',function (req, res) {
+    app.get('/',function (req, res, next) {
         if(!res.locals.user){
             res.redirect('/login')
             return
         }
-
         next();
-
     });
 
     app.get('/home',function (req, res) {
@@ -20,11 +23,11 @@ module.exports = function (app) {
         });
     });
 
-    app.use('/login',require('./login'));
+    app.use('/login', require('./login'));
+    app.use('/logout', require('./logout'));
 
     /*
     app.use('/reg',require('./reg'));
-    app.use('/logout',require('./logout'));
     app.use('/posts',require('./posts'));
     */
 

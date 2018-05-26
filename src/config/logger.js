@@ -1,7 +1,7 @@
 /**
  * Created by unique on 2018/5/26.
  */
-var winston=require('winston');
+var winston = require('winston');
 
 var logger = new (winston.Logger)({
     transports: [
@@ -13,4 +13,4 @@ var logger = new (winston.Logger)({
             maxFiles: 10 })
     ]});
 
-exports.logger=logger;
+exports.logger = logger;
