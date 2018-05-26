@@ -1,0 +1,7 @@
+node_modules/
+nodejsBlog-master/
+electron/
+.idea/
+logs/
+dist/
+.DS_Store

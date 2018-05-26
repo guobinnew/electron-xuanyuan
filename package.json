@@ -1,0 +1,41 @@
+{
+  "name": "xuanyuan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "debug": "electron . --debug --enable-logging",
+    "publish": "electron-packager ./ xuanyuan --platform=mas --arch=x64 --app_version=1.0.0 --electron_version=2.0.2  --out=dist/ --overwrite --ignore=node_modules/electron* --ignore=node_mudules/.bin --ignore=.git --ignore=dist --prune",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "crypto-js": "^3.1.9-1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-formidable": "^1.0.0",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.15.6",
+    "express-winston": "^2.5.1",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "nodemailer": "^4.6.5",
+    "serve-favicon": "^2.5.0",
+    "superagent": "^3.8.3",
+    "uuid": "^3.2.1",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0",
+    "mocha": "^5.2.0"
+  }
+}

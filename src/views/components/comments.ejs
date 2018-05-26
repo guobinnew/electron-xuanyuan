@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+        <h3>留言</h3>
+        <% comments.forEach(function (comment) { %>
+          <div class="comment">
+            <span class="avatar">
+              <img src="/upload/img/<%= comment.author.avatar %>">
+            </span>
+            <div class="content">
+              <a class="author" href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a>
+              <div class="metadata">
+                <span class="date"><%= comment.created_at %></span>
+              </div>
+              <p class="bg-info"><%- comment.content %></p>
+
+              <% if (user && comment.author._id && user._id.toString() === comment.author._id.toString()) { %>
+                <div class="actions">
+                  <a class="reply" href="/posts/<%= post._id %>/comment/<%= comment._id %>/remove">删除</a>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
+
+        <% if (user) { %>
+          <form class="well" method="post" action="/posts/<%= post._id %>/comment">
+            <div class="form-group">
+              <textarea name="content" class="form-control"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary" value="留言" />
+          </form>
+        <% } %>
+  </div>
+  <div class="col-md-1"></div>
+</div>
