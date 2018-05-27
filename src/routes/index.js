@@ -25,6 +25,7 @@ module.exports = function (app) {
 
     app.use('/login', require('./login'));
     app.use('/logout', require('./logout'));
+    app.use('/api', require('./api'));
 
     /*
     app.use('/reg',require('./reg'));

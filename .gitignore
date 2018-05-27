@@ -4,4 +4,5 @@ electron/
 .idea/
 logs/
 dist/
+temp/
 .DS_Store

@@ -16,23 +16,20 @@ const debug = (process.argv.indexOf("--debug") >= 0)
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600})
+    mainWindow = new BrowserWindow({
+        width: 1024,
+        height: 768,
+        icon: path.join(__dirname,'src/public/favicon.ico')
+    })
 
     // and load the index.html of the app.
     mainWindow.loadURL('http://localhost:3000/');
-
-    /*mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'app/login.html'),
-        protocol: 'file:',
-        slashes: true
-    }))*/
 
     if(debug){
         // Open the DevTools.
         mainWindow.webContents.openDevTools()
         mainWindow.maximize()
     }
-
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {

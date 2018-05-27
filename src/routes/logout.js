@@ -14,7 +14,7 @@ router.get('/', checkLogin, function (req, res, next) {
     logs.logger.log('info', '用户<' + req.session.user.user_name +'>退出登录状态');
 
     req.session.user = null;//清空session
-    req.flash('sucess', '退出成功！');
+    req.flash('success', '退出成功！');
     res.redirect('/login');
 });
 module.exports = router;

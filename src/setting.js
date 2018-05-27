@@ -17,7 +17,7 @@ module.exports = {
         secret:'ostw',  // 会话
         key: 'xuanyuan', //cookie
         cookie: {maxAge: 60000},
-        resave:false,
-        saveUninitialized:true
+        resave:true,
+        saveUninitialized:false
     }
 };

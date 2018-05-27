@@ -10,7 +10,7 @@
 <body class="text-center">
 <header>
     <form class="form-signin" method="post">
-        <img class="mb-4" src="public/img/logo.png" alt="" width="72" height="72">
+        <img class="mb-4" src="/img/logo.png" alt="" width="72" height="72">
         <p class="h3 mb-3 font-weight-normal app-title">轩辕</p>
         <p class="h5 mb-3 font-weight-normal app-title">资产管理工具</p>
         <div class="input-group">
@@ -20,7 +20,11 @@
         <div class="help-block with-errors"></div>
         <input type="password" id="inputPassword" name="userpwd" data-minlength="4" class="form-control" placeholder="密码" required>
         <div class="help-block with-errors"></div>
-        <p class="h6 mb-3 font-weight-normal login-message"><%= error %></p>
+        <p class="h6 mb-3 font-weight-normal login-message">
+            <% if(error){ %>
+            <%= error %>
+            <% } %>
+        </p>
         <button class="btn btn-lg btn-primary" id="login" type="submit">登录</button>
     </form>
 </header>

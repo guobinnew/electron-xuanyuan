@@ -30,8 +30,7 @@
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(cookieParser());
-    // uncomment after placing your favicon in /public
-    //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+    app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
     app.use(session(settings.session));
     // flash中间件，用来显示通知信息
