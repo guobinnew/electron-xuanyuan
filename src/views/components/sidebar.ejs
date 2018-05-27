@@ -1,13 +1,72 @@
-<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">资产管理 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">统计</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">导出</a>
-        </li>
-    </ul>
-</nav>
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="/home" class="site_title"><i class="fa fa-grav"></i> <span>轩辕</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+            <div class="profile_pic">
+                <img src="img/img.jpg" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+                <h2><%= user.nick %></h2>
+                <span><%= user.type %></span>
+            </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br />
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <h3>基础管理</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> 资产 <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/home">资产清单</a></li>
+                            <li><a href="#">标签制作</a></li>
+                            <li><a href="#">输出&打印</a></li>
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-edit"></i> 电子表单 <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="#">信息系统</a></li>
+                            <li><a href="#">人员</a></li>
+                            <li><a href="#">会议</a></li>
+                            <li><a href="#">教育培训</a></li>
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-desktop"></i> 系统管理 <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="#">用户管理</a></li>
+                            <li><a href="#">在线帮助</a></li>
+                            <li><a href="#">关于</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="/login">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>

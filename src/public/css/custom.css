@@ -271,7 +271,7 @@ html , body{
     padding: 4px
 }
 .profile_info {
-    padding: 10px;
+    padding: 20px;
     width: 65%;
     float: left
 }
@@ -702,7 +702,8 @@ a:focus {
 }
 .top_nav .dropdown-menu li a {
     width: 100%;
-    padding: 12px 20px
+    padding: 12px 20px;
+    font-size: 14px;
 }
 .top_nav li a i {
     font-size: 15px
