@@ -25,6 +25,12 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadURL('http://localhost:3000/');
 
+    /*mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'temp/gentelella-master/production/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }))*/
+
     if(debug){
         // Open the DevTools.
         mainWindow.webContents.openDevTools()

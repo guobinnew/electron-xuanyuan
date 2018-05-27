@@ -23,7 +23,7 @@ function getQueryStringArgs(q) {
 }
 
 $(document).ready(function () {
-
+    $('#username').editable();
     $('#tb_assets').bootstrapTable({
         url: '/api/assets',  //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
@@ -52,6 +52,7 @@ $(document).ready(function () {
         showPaginationSwitch: false,
         minimumCountColumns: 2,             //最少允许的列数
         clickToSelect: true,                //是否启用点击选中行
+        idField:'id',
         uniqueId: "id",                     //每一行的唯一标识，一般为主键列
         showToggle: false,                  //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
@@ -85,7 +86,10 @@ $(document).ready(function () {
             },
             {
                 field: 'checker',
-                title: '验收人员'
+                title: '验收人员',
+                formatter: function (value, row, index) {
+                    return "<a href=\"#\" class=\"UserName\" data-type=\"text\" data-pk=\""+row.Id+"\" data-title=\"用户名\">" + value + "</a>";
+                }
             }
         ]
     });
