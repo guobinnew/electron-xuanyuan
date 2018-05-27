@@ -16,8 +16,8 @@ module.exports = {
     session: {
         secret:'ostw',  // 会话
         key: 'xuanyuan', //cookie
-        cookie: {maxAge: 60000},
+        cookie: {secure: false, maxAge: null},
         resave:true,
-        saveUninitialized:false
+        saveUninitialized: true
     }
 };
