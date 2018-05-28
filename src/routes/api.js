@@ -6,6 +6,7 @@ var router = express.Router()
 var settings = require('../setting')
 var logs=require('../config/logger.js')
 var checkLogin = require('../middlewares/check').checkLogin
+var checkNotAdmin = require('../middlewares/check').checkNotAdmin
 const query = require("../middlewares/query")
 
 function convertUTCDateToLocal(UTCDateString) {
@@ -26,9 +27,10 @@ function convertUTCDateToLocal(UTCDateString) {
 /** 用于中断的信号 */
 class BreakSignal {}
 
-//退出
+// 请求资产列表（支持分页和过滤）
 router.get('/assets', function (req, res, next) {
-    //logs.logger.log('info', '用户<' + res.locals.user.user_name +'>请求Assets数据');
+    // 暂时关闭
+    //logs.logger.log('info', '用户<' + res.locals.user.name +'>请求Assets数据');
 
     // 分页
     var paging = ''
@@ -84,4 +86,81 @@ router.get('/assets', function (req, res, next) {
     })
 
 });
-module.exports = router;
+
+// 请求资产类型
+router.get('/asset_types', function (req, res, next) {
+    // 暂时关闭
+    //logs.logger.log('info', '用户<' + res.locals.user.name +'>请求AssetTypes数据');
+
+    // 获取用户信息，检验是否正确
+    const sql = 'select * from asset_types;'
+    query(sql).then(function (data) {
+        if (data.err) {
+            throw new BreakSignal();
+        }
+        req.flash('success', '数据请求成功！')
+        var result = {
+            total: data.rows.length,
+            rows: data.rows
+        }
+        result.rows = data.rows
+        res.json(result)
+    }).catch(BreakSignal, function (err) {
+        req.flash('error', '查询数据库失败')
+        logs.logger.log('error', '查询数据库失败')
+        res.json({total: 0, rows: []})
+    })
+})
+
+// 请求用户类型
+router.get('/user_types', function (req, res, next) {
+    // 暂时关闭
+    //logs.logger.log('info', '用户<' + res.locals.user.name +'>请求AssetTypes数据');
+
+    // 获取用户信息，检验是否正确
+    const sql = 'select * from user_types;'
+    query(sql).then(function (data) {
+        if (data.err) {
+            throw new BreakSignal();
+        }
+        req.flash('success', '数据请求成功！')
+        var result = {
+            total: data.rows.length,
+            rows: data.rows
+        }
+        result.rows = data.rows
+        res.json(result)
+    }).catch(BreakSignal, function (err) {
+        req.flash('error', '查询数据库失败')
+        logs.logger.log('error', '查询数据库失败')
+        res.json({total: 0, rows: []})
+    })
+})
+
+// 请求用户列表（管理员功能）
+router.get('/users', /*checkNotAdmin,*/ function (req, res, next) {
+    // 暂时关闭
+    //logs.logger.log('info', '用户<' + res.locals.user.name +'>请求AssetTypes数据');
+
+    // 获取用户信息，检验是否正确
+    const sql = 'select id, name, nick, privilege, type from user_view;'
+    query(sql).then(function (data) {
+        if (data.err) {
+            throw new BreakSignal();
+        }
+        req.flash('success', '数据请求成功！')
+        var result = {
+            total: data.rows.length,
+            rows: data.rows
+        }
+        result.rows = data.rows
+        res.json(result)
+    }).catch(BreakSignal, function (err) {
+        req.flash('error', '查询数据库失败')
+        logs.logger.log('error', '查询数据库失败')
+        res.json({total: 0, rows: []})
+    })
+})
+
+
+module.exports = router

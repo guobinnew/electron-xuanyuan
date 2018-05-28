@@ -1,9 +1,6 @@
 /**
  * Created by unique on 2018/5/28.
  */
-/**
- * Created by unique on 2018/5/24.
- */
 
 function getQueryStringArgs(q) {
     var qs = q.split('?')[1] || (location.search.length > 0 ? location.search.substring(1) : ''),
@@ -25,6 +22,7 @@ function getQueryStringArgs(q) {
     return query;
 }
 
+
 $(document).ready(function () {
 
     $("#tableview-mode").bootstrapSwitch({
@@ -36,6 +34,34 @@ $(document).ready(function () {
             $('#tb_assets').bootstrapTable('toggleView')
         }
     });
+
+    // asset_types = $.ajax({
+    //         url: "/api/asset_types",
+    //         async: false
+    //     }).responseJSON
+    //
+    // user_list =  $.ajax({
+    //     url: "/api/users",
+    //     async: false
+    // }).responseJSON
+    //
+    // user_types =  $.ajax({
+    //     url: "/api/user_types",
+    //     async: false
+    // }).responseJSON
+    let asset_types_enum = [];
+    $.ajax({
+        url: '/api/asset_types',
+        async: false,
+        type: "get",
+        data: {},
+        success: function (data) {
+            $.each(data.rows, function (key, value) {
+                asset_types_enum.push({value: value.type_id, text: value.type_name});
+            });
+        }
+    });
+
 
     $('#username').editable();
 
@@ -84,22 +110,44 @@ $(document).ready(function () {
             },
             {
                 field: 'sn',
-                title: 'SN'
+                title: 'SN',
+                editable: {
+                    type: 'text',
+                    title: 'SN',
+                    mode: "inline",
+                    validate: function (v) {
+                        if (!v) return 'SN不能为空';
+                    }
+                }
             },
             {
                 field: 'type',
-                title: '资产类型ID',
-                visible: false
-            },
-            {
-                field: 'type_name',
-                title: '资产类型'
+                title: '资产类型',
+                editable: {
+                    type: 'select',
+                    title: '资产类型',
+                    mode: "inline",
+                    source: asset_types_enum
+                }
             },
             {
                 field: 'purchase_date',
-                title: '采购时间'
+                title: '采购时间',
+                editable: {
+                    type: 'date',
+                    mode: "inline",
+                    title: '采购时间',
+                }
             },
-
+            {
+                field: 'reject_date',
+                title: '报废时间',
+                editable: {
+                    type: 'date',
+                    mode: "inline",
+                    title: '报废时间',
+                }
+            },
             {
                 field: 'checker',
                 title: '验收人员ID',
@@ -107,14 +155,20 @@ $(document).ready(function () {
             },
             {
                 field: 'checker_nick',
-                title: '验收人员',
-                formatter: function (value, row, index) {
-                    return "<a href=\"#\" class=\"UserName\" data-type=\"text\" data-pk=\""+row.Id+"\" data-title=\"用户名\">" + value + "</a>";
-                }
+                title: '验收人员'
             },
             {
                 field: 'description',
-                title: '说明'
+                title: '说明',
+                width: '200',
+                editable: {
+                    type: 'text',
+                    mode: "inline",
+                    title: '报废时间',
+                },
+                formatter: function (value, row, index) {
+                    return value ? value : '';
+                }
             },
             {
                 field: 'action',
