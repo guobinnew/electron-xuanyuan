@@ -17,8 +17,16 @@ module.exports = function (app) {
         next();
     });
 
+    app.get('/',function (req, res, next) {
+        res.redirect('/welcome')
+    });
+
     app.get('/home',function (req, res) {
-        res.render('home', {
+        res.redirect('/welcome')
+    });
+
+    app.get('/welcome',function (req, res) {
+        res.render('welcome', {
             title: res.locals.appTitle
         });
     });
@@ -26,11 +34,7 @@ module.exports = function (app) {
     app.use('/login', require('./login'));
     app.use('/logout', require('./logout'));
     app.use('/api', require('./api'));
-
-    /*
-    app.use('/reg',require('./reg'));
-    app.use('/posts',require('./posts'));
-    */
+    app.use('/asset', require('./asset'));
 
     // 404 page
     app.use(function (req, res) {

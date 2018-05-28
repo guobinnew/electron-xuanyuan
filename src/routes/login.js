@@ -41,7 +41,7 @@ router.post('/',checkNotLogin,function (req,res,next) {
         logs.logger.log('info', '用户<' + name + '>登录成功')
         req.session.user = data.rows[0]
         // 跳转到主页
-        res.redirect('/home')
+        res.redirect('/welcome')
     }).catch(function (err) {
         req.flash('error', '查询数据库失败')
         logs.logger.log('error', '查询数据库失败')

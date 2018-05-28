@@ -33,7 +33,7 @@ $(document).ready(function () {
         pagination: true,                   //是否显示分页（*）
         sortable: false,                    //是否启用排序
         sortOrder: "asc",                   //排序方式
-        iconsPrefix: 'fa',
+        //iconsPrefix: 'fa',
         queryParams: function (params) {
             var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
                 limit: params.limit,   //页面大小
@@ -72,25 +72,42 @@ $(document).ready(function () {
                 title: 'SN'
             },
             {
+                field: 'type',
+                title: '资产类型ID',
+                visible: false
+            },
+            {
+                field: 'type_name',
+                title: '资产类型'
+            },
+            {
                 field: 'purchase_date',
                 title: '采购时间'
+            },
+
+            {
+                field: 'checker',
+                title: '验收人员ID',
+                visible: false
+            },
+            {
+                field: 'checker_nick',
+                title: '验收人员',
+                formatter: function (value, row, index) {
+                    return "<a href=\"#\" class=\"UserName\" data-type=\"text\" data-pk=\""+row.Id+"\" data-title=\"用户名\">" + value + "</a>";
+                }
             },
             {
                 field: 'description',
                 title: '说明'
             },
             {
-                field: 'checker_id',
-                title: '验收人员ID',
-                visible: false
-            },
-            {
-                field: 'checker',
-                title: '验收人员',
+                field: 'action',
+                title: '动作',
                 formatter: function (value, row, index) {
-                    return "<a href=\"#\" class=\"UserName\" data-type=\"text\" data-pk=\""+row.Id+"\" data-title=\"用户名\">" + value + "</a>";
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="..."><button id="btn_delete" type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></button></div>';
                 }
-            }
+            },
         ]
     });
 

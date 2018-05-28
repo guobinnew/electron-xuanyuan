@@ -6,14 +6,13 @@
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css" >
-    <link type="text/css" rel="stylesheet" href="/css/login.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/custom/login.css"/>
 </head>
 <body class="text-center">
 <header>
     <form class="form-signin" method="post">
-        <img class="mb-4" src="/img/logo.png" alt="" width="72" height="72">
-        <p class="h3 mb-3 font-weight-normal app-title">轩辕</p>
-        <p class="h5 mb-3 font-weight-normal app-title">资产管理工具</p>
+        <h1><i class="fa fa-grav"></i> <%= app.title %> </h1>
+        <p class="h4 mb-3 font-weight-normal app-title"><%= app.desc %></p>
         <div class="input-group">
             <input type="text" id="inputName" name="username" pattern="^[A-z][_A-z0-9.]{0,}$" class="form-control" placeholder="用户名" aria-describedby="email-addon">
             <span class="input-group-addon" id="email-addon">@ostw.com</span>
@@ -29,16 +28,15 @@
         <button class="btn btn-lg btn-primary" id="login" type="submit">登录</button>
     </form>
     <div>
-        <h2><i class="fa fa-grav"></i> Unique </h2>
-        <p>©2018 版权所有.</p>
+        <p>©2018 志成凌云 版权所有.</p>
     </div>
 </header>
 <!-- Insert this line above script imports  -->
 <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
 <!-- Insert this line after script imports -->
 <script>if (window.module) module = window.module;</script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
 </body>
 </html>
