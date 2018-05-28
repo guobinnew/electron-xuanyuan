@@ -42,7 +42,7 @@ router.post('/',checkNotLogin,function (req,res,next) {
         req.session.user = data.rows[0]
         // 跳转到主页
         res.redirect('/welcome')
-    }).catch(function (err) {
+    }).catch(BreakSignal, function (err) {
         req.flash('error', '查询数据库失败')
         logs.logger.log('error', '查询数据库失败')
         return res.redirect('/login')

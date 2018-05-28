@@ -33,8 +33,13 @@ router.get('/assets', function (req, res, next) {
     // 分页
     var paging = ''
     if( req.query){
+
+        if(req.query.search && req.query.search.length > 0){
+            paging += ' where sn like "%' + req.query.search + '%" or type_name like "%' + req.query.search + '%"';
+        }
+
         if(req.query.limit && req.query.offset){
-            paging = ' limit ' + req.query.offset + ',' + req.query.limit;
+            paging += ' limit ' + req.query.offset + ',' + req.query.limit;
         }
     }
 
@@ -72,7 +77,7 @@ router.get('/assets', function (req, res, next) {
             logs.logger.log('error', '数据库为空')
             res.json(result)
         }
-    }).catch(function (err) {
+    }).catch(BreakSignal, function (err) {
         req.flash('error', '查询数据库失败')
         logs.logger.log('error', '查询数据库失败')
         res.json({total: 0, rows: []})

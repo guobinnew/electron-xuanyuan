@@ -15,4 +15,10 @@ router.get('/stat', checkLogin, function (req, res, next) {
     });
 });
 
+router.get('/detail', checkLogin, function (req, res, next) {
+    res.render('asset_detail', {
+        title: res.locals.appTitle
+    });
+});
+
 module.exports = router;

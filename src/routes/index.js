@@ -39,9 +39,7 @@ module.exports = function (app) {
     // 404 page
     app.use(function (req, res) {
         if (!res.headersSent) {
-            res.render('404',{
-                title : 'Not Found',
-            });
+            res.render('404');
         }
     });
 };
