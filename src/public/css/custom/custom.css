@@ -1483,7 +1483,7 @@ ul.msg_list li {
 }
 ul.msg_list li:last-child {
     margin-bottom: 6px;
-    padding: 10px
+    padding: 5px
 }
 ul.msg_list li a {
     padding: 3px 5px !important

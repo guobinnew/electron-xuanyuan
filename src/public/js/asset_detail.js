@@ -22,8 +22,40 @@ function getQueryStringArgs(q) {
     return query;
 }
 
+function nowDateString() {
+    let date = new Date()
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+}
+
+let $table = null
 
 $(document).ready(function () {
+
+    $table = $('#tb_assets')
+
+    let asset_types_enum = [];
+    $.ajax({
+        url: '/api/asset_types',
+        async: false,
+        type: "get",
+        data: {},
+        success: function (data) {
+            let $sel = $('#asset-types-select')
+            $.each(data.rows, function (key, value) {
+                asset_types_enum.push({value: value.type_id, text: value.type_name});
+                $sel.append(`<option value="${value.type_id}">${value.type_name}</option>`);
+            });
+        }
+    });
+
+    $('#purchasepicker>input').attr('value',nowDateString)
+    $('#purchasepicker').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN',
+        autoclose: true, //自动关闭
+        startView: 2,
+        minView: "month",
+    });
 
     $("#tableview-mode").bootstrapSwitch({
         state: false,
@@ -31,14 +63,16 @@ $(document).ready(function () {
         offText: '列表',
         size: 'small',
         onSwitchChange: function(event, state) {
-            $('#tb_assets').bootstrapTable('toggleView')
+            $table.bootstrapTable('toggleView')
         }
     });
 
-    // asset_types = $.ajax({
-    //         url: "/api/asset_types",
-    //         async: false
-    //     }).responseJSON
+    $('#btn_add_asset').on('click', function () {
+       console.log('保存。。。。。。')
+        $('#myModal').modal('hide')
+    })
+
+
     //
     // user_list =  $.ajax({
     //     url: "/api/users",
@@ -49,23 +83,13 @@ $(document).ready(function () {
     //     url: "/api/user_types",
     //     async: false
     // }).responseJSON
-    let asset_types_enum = [];
-    $.ajax({
-        url: '/api/asset_types',
-        async: false,
-        type: "get",
-        data: {},
-        success: function (data) {
-            $.each(data.rows, function (key, value) {
-                asset_types_enum.push({value: value.type_id, text: value.type_name});
-            });
-        }
-    });
+
+
 
 
     $('#username').editable();
 
-    $('#tb_assets').bootstrapTable({
+    $table.bootstrapTable({
         url: '/api/assets',  //请求后台的URL（*）
         method: 'get',                      //请求方式（*）
         toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -74,7 +98,6 @@ $(document).ready(function () {
         pagination: true,                   //是否显示分页（*）
         sortable: false,                    //是否启用排序
         sortOrder: "asc",                   //排序方式
-        //iconsPrefix: 'fa',
         queryParams: function (params) {
             var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
                 limit: params.limit,   //页面大小
@@ -127,7 +150,10 @@ $(document).ready(function () {
                     type: 'select',
                     title: '资产类型',
                     mode: "inline",
-                    source: asset_types_enum
+                    source: asset_types_enum,
+                    validate: function (v) {
+                        if (!v) return '资产类型不能为空';
+                    }
                 }
             },
             {
@@ -137,6 +163,9 @@ $(document).ready(function () {
                     type: 'date',
                     mode: "inline",
                     title: '采购时间',
+                    validate: function (v) {
+                        if (!v) return '采购时间格式不正确';
+                    }
                 }
             },
             {
@@ -164,7 +193,7 @@ $(document).ready(function () {
                 editable: {
                     type: 'text',
                     mode: "inline",
-                    title: '报废时间',
+                    title: '说明',
                 },
                 formatter: function (value, row, index) {
                     return value ? value : '';
@@ -174,7 +203,11 @@ $(document).ready(function () {
                 field: 'action',
                 title: '动作',
                 formatter: function (value, row, index) {
-                    return '<div class="btn-group btn-group-sm" role="group" aria-label="..."><button id="btn_delete" type="button" class="btn btn-secondary"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></button></div>';
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="...">' +
+                        '<button id="btn_delete" type="button" class="btn btn-secondary">' +
+                        '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>' +
+                        '</button>' +
+                        '</div>';
                 }
             },
         ]

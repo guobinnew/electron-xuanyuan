@@ -21,4 +21,10 @@ router.get('/detail', checkLogin, function (req, res, next) {
     });
 });
 
+router.get('/label', checkLogin, function (req, res, next) {
+    res.render('asset_label', {
+        title: res.locals.appTitle
+    });
+});
+
 module.exports = router;
